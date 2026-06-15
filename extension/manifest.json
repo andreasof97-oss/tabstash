@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "TabStash — Tab Manager & Session Saver",
+  "short_name": "TabStash",
+  "version": "1.0.0",
+  "description": "Save, organize & restore browser tabs as sessions. Never lose your tabs again. Free tab manager with color-coded sessions.",
+  "permissions": [
+    "tabs",
+    "storage",
+    "favicon"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_title": "TabStash — Save your tabs"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "minimum_chrome_version": "116"
+}
