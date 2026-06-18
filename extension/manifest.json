@@ -2,8 +2,8 @@
   "manifest_version": 3,
   "name": "TabStash — Tab Manager & Session Saver",
   "short_name": "TabStash",
-  "version": "1.0.0",
-  "description": "Save, organize & restore browser tabs as sessions. Never lose your tabs again. Free tab manager with color-coded sessions.",
+  "version": "1.1.0",
+  "description": "Save, organize & restore browser tabs as sessions. Never lose your tabs again. Free tab manager with color-coded sessions, folders & keyboard shortcuts.",
   "permissions": [
     "tabs",
     "storage",
@@ -25,6 +25,15 @@
   },
   "background": {
     "service_worker": "background.js"
+  },
+  "commands": {
+    "save-session": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+U",
+        "mac": "Command+Shift+U"
+      },
+      "description": "Save all current tabs as a new session"
+    }
   },
   "minimum_chrome_version": "116"
 }

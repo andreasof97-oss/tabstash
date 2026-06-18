@@ -1141,3 +1141,239 @@ body {
 .session-card:nth-child(3) { animation-delay: 100ms; }
 .session-card:nth-child(4) { animation-delay: 150ms; }
 .session-card:nth-child(5) { animation-delay: 200ms; }
+
+/* ============================================================
+   Folder Styles
+   ============================================================ */
+
+/* Folder group in main list */
+.folder-group {
+  margin-bottom: 12px;
+}
+
+.folder-group-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+
+.folder-group-header:hover {
+  background: var(--hover-bg);
+}
+
+.folder-group-header .folder-chevron {
+  transition: transform 0.2s;
+  font-size: 10px;
+}
+
+.folder-group-header.collapsed .folder-chevron {
+  transform: rotate(-90deg);
+}
+
+.folder-group-sessions {
+  overflow: hidden;
+}
+
+.folder-group-header.collapsed + .folder-group-sessions {
+  display: none;
+}
+
+/* Manage folders view */
+.folder-create-row {
+  display: flex;
+  gap: 8px;
+}
+
+.folder-create-row .form-input {
+  flex: 1;
+}
+
+.folder-create-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.folder-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.folder-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: var(--card-bg);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.folder-item .folder-icon {
+  font-size: 16px;
+}
+
+.folder-item .folder-name {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.folder-item .folder-count {
+  font-size: 11px;
+  color: var(--text-secondary);
+  background: var(--hover-bg);
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+.folder-item .folder-rename-btn,
+.folder-item .folder-delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 4px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.folder-item:hover .folder-rename-btn,
+.folder-item:hover .folder-delete-btn {
+  opacity: 0.7;
+}
+
+.folder-item .folder-rename-btn:hover,
+.folder-item .folder-delete-btn:hover {
+  opacity: 1;
+}
+
+.folder-empty {
+  padding: 16px;
+  text-align: center;
+}
+
+/* Folder context menu */
+.folder-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.folder-menu-overlay.hidden {
+  display: none;
+}
+
+.folder-menu {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 8px 0;
+  min-width: 200px;
+  max-width: 280px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+.folder-menu-header {
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 4px;
+}
+
+.folder-menu-items {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.folder-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  color: var(--text-primary);
+  transition: background 0.15s;
+}
+
+.folder-menu-item:hover {
+  background: var(--hover-bg);
+}
+
+.folder-menu-item.active {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* Session card folder badge */
+.session-folder-badge {
+  font-size: 10px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+/* Move to folder button on card */
+.move-folder-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.session-card:hover .move-folder-btn {
+  opacity: 0.7;
+}
+
+.move-folder-btn:hover {
+  opacity: 1 !important;
+}
+
+/* Edit view folder select */
+.form-select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.form-select:focus {
+  border-color: var(--accent);
+}

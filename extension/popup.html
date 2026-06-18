@@ -20,6 +20,11 @@
         <h1 class="header-title">TabStash</h1>
       </div>
       <div class="header-right">
+        <button id="btn-manage-folders" class="icon-btn" title="Manage Folders">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+          </svg>
+        </button>
         <button id="btn-import" class="icon-btn" title="Import from OneTab">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -43,7 +48,7 @@
         <circle cx="11" cy="11" r="8"/>
         <line x1="21" y1="21" x2="16.65" y2="16.65"/>
       </svg>
-      <input type="text" id="search-input" class="search-input" placeholder="Search sessions & tabs…" autocomplete="off" spellcheck="false">
+      <input type="text" id="search-input" class="search-input" placeholder="Search sessions & tabs… (press /)" autocomplete="off" spellcheck="false">
       <button id="search-clear" class="search-clear hidden" title="Clear search">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="18" y1="6" x2="6" y2="18"/>
@@ -106,6 +111,13 @@
       <div class="form-group">
         <label>Color</label>
         <div id="color-picker" class="color-picker"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="save-folder-select">Folder</label>
+        <select id="save-folder-select" class="form-select">
+          <option value="">None (Uncategorized)</option>
+        </select>
       </div>
 
       <!-- Duplicate Warning -->
@@ -211,6 +223,12 @@
         <label>Color</label>
         <div id="edit-color-picker" class="color-picker"></div>
       </div>
+      <div class="form-group">
+        <label for="edit-folder-select">Folder</label>
+        <select id="edit-folder-select" class="form-select">
+          <option value="">None (Uncategorized)</option>
+        </select>
+      </div>
       <button id="btn-confirm-edit" class="btn-primary">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="20 6 9 17 4 12"/>
@@ -297,9 +315,67 @@
       </div>
 
       <div class="settings-group">
+        <label class="settings-label">Keyboard Shortcuts</label>
+        <div class="settings-shortcuts">
+          <div class="shortcut-row">
+            <span class="shortcut-label">Save session</span>
+            <kbd class="shortcut-key">Ctrl+Shift+U</kbd>
+          </div>
+          <div class="shortcut-row">
+            <span class="shortcut-label">Focus search</span>
+            <kbd class="shortcut-key">/</kbd>
+          </div>
+          <div class="shortcut-row">
+            <span class="shortcut-label">Go back / Close</span>
+            <kbd class="shortcut-key">Esc</kbd>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-group">
         <label class="settings-label">About</label>
-        <p class="settings-about">TabStash v1.0.0</p>
+        <p class="settings-about">TabStash v1.1.0</p>
         <p class="settings-about muted">Save your tabs. Find your focus.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FOLDER MANAGEMENT VIEW ==================== -->
+  <div id="view-folders" class="view">
+    <header class="header">
+      <button id="folders-back" class="icon-btn back-btn" title="Back">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"/>
+          <polyline points="12 19 5 12 12 5"/>
+        </svg>
+      </button>
+      <h2 class="header-title">Manage Folders</h2>
+      <div class="header-right"></div>
+    </header>
+
+    <div class="save-form">
+      <!-- Create new folder -->
+      <div class="form-group">
+        <label for="new-folder-name">New Folder</label>
+        <div class="folder-create-row">
+          <input type="text" id="new-folder-name" class="form-input" placeholder="e.g. Work, Personal, Research…" maxlength="40" autocomplete="off" spellcheck="false">
+          <button id="btn-create-folder" class="btn-primary btn-sm folder-create-btn" disabled>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            Add
+          </button>
+        </div>
+      </div>
+
+      <!-- Folder list -->
+      <div class="form-group">
+        <label>Your Folders</label>
+        <div id="folder-list" class="folder-list"></div>
+        <div id="folder-empty" class="folder-empty">
+          <p class="empty-desc">No folders yet. Create one above to organize your sessions.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -315,6 +391,14 @@
         <button id="confirm-cancel" class="btn-outline btn-sm">Cancel</button>
         <button id="confirm-ok" class="btn-danger btn-sm">Delete</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Folder context menu (move to folder) -->
+  <div id="folder-menu-overlay" class="folder-menu-overlay hidden">
+    <div id="folder-menu" class="folder-menu">
+      <div class="folder-menu-header">Move to folder</div>
+      <div id="folder-menu-items" class="folder-menu-items"></div>
     </div>
   </div>
 
