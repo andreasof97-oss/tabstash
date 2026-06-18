@@ -451,7 +451,9 @@ body {
   font-size: 13px;
   color: var(--text-tertiary);
   max-width: 260px;
+  margin: 0 auto;
   line-height: 1.5;
+  text-align: center;
 }
 
 /* ---------- Session Counter ---------- */
