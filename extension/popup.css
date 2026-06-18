@@ -1175,7 +1175,7 @@ body {
 }
 
 .folder-group-header:hover {
-  background: var(--hover-bg);
+  background: var(--bg-hover);
 }
 
 .folder-group-header .folder-chevron {
@@ -1228,9 +1228,9 @@ body {
   align-items: center;
   gap: 8px;
   padding: 8px 10px;
-  background: var(--card-bg);
+  background: var(--bg-primary);
   border-radius: 8px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-primary);
 }
 
 .folder-item .folder-icon {
@@ -1246,7 +1246,7 @@ body {
 .folder-item .folder-count {
   font-size: 11px;
   color: var(--text-secondary);
-  background: var(--hover-bg);
+  background: var(--bg-hover);
   padding: 2px 6px;
   border-radius: 10px;
 }
@@ -1297,8 +1297,8 @@ body {
 }
 
 .folder-menu {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
+  background: var(--bg-primary);
+  border: 1px solid var(--border-primary);
   border-radius: 12px;
   padding: 8px 0;
   min-width: 200px;
@@ -1313,7 +1313,7 @@ body {
   color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border-primary);
   margin-bottom: 4px;
 }
 
@@ -1338,7 +1338,7 @@ body {
 }
 
 .folder-menu-item:hover {
-  background: var(--hover-bg);
+  background: var(--bg-hover);
 }
 
 .folder-menu-item.active {
@@ -1378,7 +1378,7 @@ body {
 .form-select {
   width: 100%;
   padding: 8px 10px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-primary);
   border-radius: 8px;
   background: var(--bg);
   color: var(--text-primary);
