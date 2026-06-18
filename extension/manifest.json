@@ -29,8 +29,8 @@
   "commands": {
     "save-session": {
       "suggested_key": {
-        "default": "Alt+Shift+S",
-        "mac": "MacCtrl+Shift+S"
+        "default": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+Y"
       },
       "description": "Save all current tabs as a new session"
     }
