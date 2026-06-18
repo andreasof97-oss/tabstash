@@ -3,6 +3,10 @@
    Clean, modern SaaS aesthetic. Minimal but functional.
    ============================================================ */
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 /* ---------- CSS Variables / Theme ---------- */
 :root {
   /* Light theme (default) */
@@ -1192,10 +1196,16 @@ body {
 .folder-create-row {
   display: flex;
   gap: 8px;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .folder-create-row .form-input {
   flex: 1;
+  min-width: 0;
+  width: auto;
+  box-sizing: border-box;
 }
 
 .folder-create-btn {
@@ -1203,6 +1213,25 @@ body {
   align-items: center;
   gap: 4px;
   white-space: nowrap;
+  flex-shrink: 0;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.folder-create-btn:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.folder-create-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .folder-list {
