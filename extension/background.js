@@ -51,18 +51,47 @@ updateBadge();
 
 chrome.commands.onCommand.addListener(async (command) => {
   if (command === 'save-session') {
-    // Open the popup programmatically — MV3 doesn't allow opening popup from background,
-    // so we open the popup.html as a small window or use chrome.action.openPopup (Chrome 127+).
-    // Fallback: open popup.html with a query param so it auto-opens the save view.
     try {
-      // chrome.action.openPopup() is available in Chrome 127+
-      if (chrome.action.openPopup) {
-        await chrome.action.openPopup();
+      // Quick-save all tabs in the current window as a new session
+      const tabs = await chrome.tabs.query({ currentWindow: true });
+      const validTabs = tabs.filter(t => t.url && !t.url.startsWith('chrome://') && !t.url.startsWith('chrome-extension://'));
+
+      if (validTabs.length === 0) return;
+
+      // Generate session name with date/time
+      const now = new Date();
+      const name = `Quick Save — ${now.toLocaleDateString()} ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+
+      const session = {
+        id: Date.now().toString(36) + Math.random().toString(36).substr(2, 9),
+        name,
+        color: 'blue',
+        tabs: validTabs.map(t => ({ url: t.url, title: t.title || t.url })),
+        createdAt: Date.now(),
+        restoredAt: null,
+        folderId: null,
+      };
+
+      // Load existing sessions, add new one, save
+      const result = await chrome.storage.local.get('tabstash_sessions');
+      const sessions = result.tabstash_sessions || [];
+
+      // Check free tier limit
+      const MAX_FREE = 5;
+      if (sessions.length >= MAX_FREE) {
+        // Can't save — at limit. Show a notification if possible.
+        return;
       }
+
+      sessions.unshift(session);
+      await chrome.storage.local.set({ tabstash_sessions: sessions });
+
+      // Brief notification badge flash
+      await chrome.action.setBadgeText({ text: '✓' });
+      await chrome.action.setBadgeBackgroundColor({ color: '#10B981' });
+      setTimeout(() => updateBadge(), 1500);
     } catch (e) {
-      // Fallback: just set a flag in storage that the popup reads on open
+      // Silently fail
     }
-    // Set a flag so the popup knows to open the save view
-    await chrome.storage.local.set({ tabstash_open_save: true });
   }
 });
