@@ -3,7 +3,7 @@
   "name": "TabStash — Tab Manager & Session Saver",
   "short_name": "TabStash",
   "version": "1.1.0",
-  "description": "Save, organize & restore browser tabs as sessions. Never lose your tabs again. Free tab manager with color-coded sessions, folders & keyboard shortcuts.",
+  "description": "Save, organize & restore browser tabs as sessions. Never lose your tabs again. Color-coded, folders, search & shortcuts.",
   "permissions": [
     "tabs",
     "storage",
